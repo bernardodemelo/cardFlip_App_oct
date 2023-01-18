@@ -48,12 +48,16 @@ function App() {
       !pickedStudents.includes(picking)
     ) {
       do {
-        randomStudent =
-          studentsList[Math.floor(Math.random() * studentsList.length)];
-      } while (pickedStudents.includes(randomStudent));
+        randomStudent = remaining[Math.floor(Math.random() * remaining.length)];
+      } while (
+        pickedStudents.includes(randomStudent) &&
+        randomStudent === picking
+      );
+
+      // Update the array of already picked students
+      setPickedStudents([picking, randomStudent, ...pickedStudents]);
 
       // Flip the card
-      setPickedStudents([picking, randomStudent, ...pickedStudents]);
       e.target.classList.add("flippedCard");
       e.target.textContent = randomStudent;
 
@@ -105,9 +109,6 @@ function App() {
             console.log(`Current Picking Student  >>>  ${picking}`);
             console.log(
               `Picked Students ${pickedStudents.length}  >>>  ${pickedStudents}`
-            );
-            console.log(
-              `All Students ${studentsList.length}  >>>  ${studentsList}`
             );
             console.log(
               `Remaining Students ${remaining.length}  >>>  ${remaining}`
