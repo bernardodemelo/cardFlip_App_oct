@@ -2,10 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [picking, setPicking] = useState("default");
-  const [pickedStudents, setPickedStudents] = useState([]);
-
-  // List of all the students
+  // Original list of all the students
   let studentsList = [
     "Alexandre A.",
     "André L.",
@@ -36,8 +33,13 @@ function App() {
     "Vanessa V.",
   ];
 
-  // Flip the card and assing a pair to the picking student
-  const pickFunction = async (e) => {
+  const [picking, setPicking] = useState("default");
+  const [pickedStudents, setPickedStudents] = useState([]);
+  const [queue, setQueue] = useState([...studentsList]);
+  const [remaining, setRemaining] = useState([...studentsList]);
+
+  const pickFunction = (e) => {
+    // Assign a random person to the picking student
     let randomStudent;
     if (
       !e.target.classList.contains("flippedCard") &&
@@ -50,19 +52,31 @@ function App() {
           studentsList[Math.floor(Math.random() * studentsList.length)];
       } while (pickedStudents.includes(randomStudent));
 
-      setPickedStudents([randomStudent, picking, ...pickedStudents]);
+      // Flip the card
+      setPickedStudents([picking, randomStudent, ...pickedStudents]);
       e.target.classList.add("flippedCard");
       e.target.textContent = randomStudent;
 
-      results();
+      // Reset select dropdown to default option
+      document.getElementById("selectStudents").value = "default";
     }
   };
 
-  // Keep track of pairs already assigned
-  const results = () => {
+  useEffect(() => {
+    // Keep track of pairs already assigned
     const resultsList = document.getElementById("results");
-    resultsList.innerHTML += `<li>${pickedStudents[1]} <--> ${pickedStudents[0]}</li>`;
-  };
+    if (pickedStudents.length > 1) {
+      resultsList.innerHTML += `<li>${pickedStudents[1]} 🤝 ${pickedStudents[0]}</li>`;
+    }
+
+    // Remove already assigned students from the select dropdown
+    for (let i = 0; i < remaining.length; i++) {
+      if (pickedStudents.includes(remaining[i])) {
+        remaining.splice(i, 1);
+        setQueue(remaining);
+      }
+    }
+  }, [pickedStudents]);
 
   return (
     <>
@@ -72,11 +86,11 @@ function App() {
           alt="ironhack logo"
         />
 
-        <select onClick={(e) => setPicking(e.target.value)}>
+        <select id="selectStudents" onClick={(e) => setPicking(e.target.value)}>
           <option key="default" value="default">
             Select your name
           </option>
-          {studentsList.map((student) => {
+          {queue.map((student) => {
             return (
               <option key={student} value={student}>
                 {student}
@@ -87,9 +101,18 @@ function App() {
 
         <button
           onClick={() => {
-            console.log(pickedStudents);
-            console.log(studentsList);
-            console.log(picking);
+            console.log(`-----------------------`);
+            console.log(`Current Picking Student  >>>  ${picking}`);
+            console.log(
+              `Picked Students ${pickedStudents.length}  >>>  ${pickedStudents}`
+            );
+            console.log(
+              `All Students ${studentsList.length}  >>>  ${studentsList}`
+            );
+            console.log(
+              `Remaining Students ${remaining.length}  >>>  ${remaining}`
+            );
+            console.log(`Students in queue ${queue.length}  >>>  ${queue}`);
           }}
         >
           console
