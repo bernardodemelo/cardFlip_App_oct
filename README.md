@@ -1,4 +1,4 @@
-[![Deployed to Cyclic](https://cardflip.cyclic.app/)
+[Deployed at Cyclic](https://cardflip.cyclic.app/)
 
 # Random Card Flip App
 
