@@ -12,29 +12,46 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 25px
+  margin-bottom: 25px;
 }
 
-img{
+img {
   width: 150px;
   margin-top: 25px;
-  margin-bottom: 25px
+  margin-bottom: 25px;
 }
 
 .card {
+  /* animation */
+  position: relative;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+
   width: 100px;
   height: 160px;
-  background-color: grey;
+  background-image: url(../public/cardCover.jpg);
+  background-size: contain;
+  border-radius: 8px;
   margin: 5px;
+
+  -webkit-box-shadow: 5px 5px 2px 0px rgba(0, 0, 0, 0.50);
+  -moz-box-shadow: 5px 5px 2px 0px rgba(0, 0, 0, 0.50);
+  box-shadow: 5px 5px 2px 0px rgba(0, 0, 0, 0.50);
 }
 
 .flippedCard {
+  /* animation */
+  transform: rotateY(360deg);
+  backface-visibility: hidden;
+
   width: 100px;
   height: 160px;
   background-color: white;
-  border: 1px solid black;
+  border: 2px solid rgba(50, 195, 253, 255);
+  border-radius: 8px;
   margin: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: none;
 }

@@ -36,9 +36,13 @@ function App() {
   const [pickedStudents, setPickedStudents] = useState([]);
   const [queue, setQueue] = useState([...studentsList]);
 
+  const numOfCards = studentsList.length / 2;
+
   const selectStudent = (e) => {
-    let picking = e.target.value;
-    setPickedStudents([picking, ...pickedStudents]);
+    if (e.target.value !== "default") {
+      let picking = e.target.value;
+      setPickedStudents([picking, ...pickedStudents]);
+    }
   };
 
   const pickFunction = (e) => {
@@ -46,8 +50,7 @@ function App() {
     let randomStudent;
     if (
       !e.target.classList.contains("flippedCard") &&
-      /*       document.getElementById("selectStudents").value === "default" && */
-      !pickedStudents.includes(randomStudent)
+      document.getElementById("selectStudents").value !== "default"
     ) {
       do {
         randomStudent = queue[Math.floor(Math.random() * queue.length)];
@@ -64,16 +67,17 @@ function App() {
       document.getElementById("selectStudents").value = "default";
 
       // Remove already assigned students from the select dropdown
-      setQueue(
-        studentsList.filter((student) => !pickedStudents.includes(student))
+      let remaining = studentsList.filter(
+        (student) => !pickedStudents.includes(student)
       );
+      setQueue(remaining);
     }
   };
 
   useEffect(() => {
     // Keep track of pairs already assigned
     const resultsList = document.getElementById("results");
-    if (pickedStudents.length > 1) {
+    if (pickedStudents.length > 1 && pickedStudents.length % 2 === 0) {
       resultsList.innerHTML += `<li>${pickedStudents[1]} 🤝 ${pickedStudents[0]}</li>`;
     }
   }, [pickedStudents]);
@@ -116,7 +120,7 @@ function App() {
       </div>
 
       <div className="App">
-        {studentsList.map((student) => {
+        {studentsList.slice(0, numOfCards).map((student) => {
           return (
             <div
               key={student}
