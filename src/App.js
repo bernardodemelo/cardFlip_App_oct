@@ -33,29 +33,28 @@ function App() {
     "Vanessa V.",
   ];
 
-  const [picking, setPicking] = useState("default");
   const [pickedStudents, setPickedStudents] = useState([]);
   const [queue, setQueue] = useState([...studentsList]);
-  const [remaining, setRemaining] = useState([...studentsList]);
+
+  const selectStudent = (e) => {
+    let picking = e.target.value;
+    setPickedStudents([picking, ...pickedStudents]);
+  };
 
   const pickFunction = (e) => {
     // Assign a random person to the picking student
     let randomStudent;
     if (
       !e.target.classList.contains("flippedCard") &&
-      picking !== "default" &&
-      !pickedStudents.includes(randomStudent) &&
-      !pickedStudents.includes(picking)
+      /*       document.getElementById("selectStudents").value === "default" && */
+      !pickedStudents.includes(randomStudent)
     ) {
       do {
-        randomStudent = remaining[Math.floor(Math.random() * remaining.length)];
-      } while (
-        pickedStudents.includes(randomStudent) &&
-        randomStudent === picking
-      );
+        randomStudent = queue[Math.floor(Math.random() * queue.length)];
+      } while (pickedStudents.includes(randomStudent));
 
       // Update the array of already picked students
-      setPickedStudents([picking, randomStudent, ...pickedStudents]);
+      setPickedStudents([randomStudent, ...pickedStudents]);
 
       // Flip the card
       e.target.classList.add("flippedCard");
@@ -63,6 +62,11 @@ function App() {
 
       // Reset select dropdown to default option
       document.getElementById("selectStudents").value = "default";
+
+      // Remove already assigned students from the select dropdown
+      setQueue(
+        studentsList.filter((student) => !pickedStudents.includes(student))
+      );
     }
   };
 
@@ -71,14 +75,6 @@ function App() {
     const resultsList = document.getElementById("results");
     if (pickedStudents.length > 1) {
       resultsList.innerHTML += `<li>${pickedStudents[1]} 🤝 ${pickedStudents[0]}</li>`;
-    }
-
-    // Remove already assigned students from the select dropdown
-    for (let i = 0; i < remaining.length; i++) {
-      if (pickedStudents.includes(remaining[i])) {
-        remaining.splice(i, 1);
-        setQueue(remaining);
-      }
     }
   }, [pickedStudents]);
 
@@ -90,7 +86,7 @@ function App() {
           alt="ironhack logo"
         />
 
-        <select id="selectStudents" onClick={(e) => setPicking(e.target.value)}>
+        <select id="selectStudents" onClick={(e) => selectStudent(e)}>
           <option key="default" value="default">
             Select your name
           </option>
@@ -106,12 +102,11 @@ function App() {
         <button
           onClick={() => {
             console.log(`-----------------------`);
-            console.log(`Current Picking Student  >>>  ${picking}`);
             console.log(
               `Picked Students ${pickedStudents.length}  >>>  ${pickedStudents}`
             );
             console.log(
-              `Remaining Students ${remaining.length}  >>>  ${remaining}`
+              `Remaining Students ${studentsList.length}  >>>  ${studentsList}`
             );
             console.log(`Students in queue ${queue.length}  >>>  ${queue}`);
           }}
