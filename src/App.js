@@ -103,10 +103,7 @@ function App() {
         {/* ------------------- */}
 
         <div className="pickingStudent">
-          <img
-            src="https://www.datocms-assets.com/14946/1661408107-logo-ironhack-blue.png?auto=format&fit=max&w=1200"
-            alt="ironhack logo"
-          />
+          <img src="ironhackLogo.png" alt="ironhack logo" />
 
           <select
             id="selectStudents"
