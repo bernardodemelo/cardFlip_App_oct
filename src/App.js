@@ -36,8 +36,10 @@ function App() {
   const [pickedStudents, setPickedStudents] = useState([]);
   const [queue, setQueue] = useState([...studentsList]);
 
-  const numOfCards = studentsList.length / 2;
+  // Get half of the cards
+  const numOfCards = studentsList.length / 2 + 1;
 
+  // Add picking student to the  pickedStudents array
   const selectStudent = (e) => {
     if (e.target.value !== "default") {
       let picking = e.target.value;
@@ -84,26 +86,46 @@ function App() {
 
   return (
     <>
-      <div className="pickingStudent">
-        <img
-          src="https://www.datocms-assets.com/14946/1661408107-logo-ironhack-blue.png?auto=format&fit=max&w=1200"
-          alt="ironhack logo"
-        />
+      {/* BACKGROUND ANIMATION */}
+      <div className="area">
+        <ul className="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        {/* ------------------- */}
 
-        <select id="selectStudents" onClick={(e) => selectStudent(e)}>
-          <option key="default" value="default">
-            Select your name
-          </option>
-          {queue.map((student) => {
-            return (
-              <option key={student} value={student}>
-                {student}
-              </option>
-            );
-          })}
-        </select>
+        <div className="pickingStudent">
+          <img
+            src="https://www.datocms-assets.com/14946/1661408107-logo-ironhack-blue.png?auto=format&fit=max&w=1200"
+            alt="ironhack logo"
+          />
 
-        <button
+          <select
+            id="selectStudents"
+            className="classic"
+            onClick={(e) => selectStudent(e)}
+          >
+            <option key="default" value="default">
+              Select your name
+            </option>
+            {queue.map((student) => {
+              return (
+                <option key={student} value={student}>
+                  {student}
+                </option>
+              );
+            })}
+          </select>
+
+          {/*         <button
           onClick={() => {
             console.log(`-----------------------`);
             console.log(
@@ -116,22 +138,27 @@ function App() {
           }}
         >
           console
-        </button>
-      </div>
+        </button> */}
+        </div>
 
-      <div className="App">
-        {studentsList.slice(0, numOfCards).map((student) => {
-          return (
-            <div
-              key={student}
-              className="card"
-              onClick={(e) => pickFunction(e)}
-            ></div>
-          );
-        })}
-      </div>
+        <div className="resultsAndCards">
+          <div className="allCards">
+            {studentsList.slice(0, numOfCards).map((student) => {
+              return (
+                <div
+                  key={student}
+                  className="card"
+                  onClick={(e) => pickFunction(e)}
+                ></div>
+              );
+            })}
+          </div>
 
-      <ul id="results"></ul>
+          <div className="resultsBox">
+            <ul id="results"></ul>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
