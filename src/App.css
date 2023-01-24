@@ -120,7 +120,7 @@ select.classic:focus {
 /* CUSTOM STYLING - Animated Background */
 .area {
   background: skyblue;
-  background: -webkit-linear-gradient(to left, #8f94fb, skyblue);
+  background: -webkit-linear-gradient(to left, skyblue, skyblue);
   width: 100%;
   height: 100vh;
 }
