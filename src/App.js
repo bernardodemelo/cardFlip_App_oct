@@ -36,6 +36,9 @@ function App() {
   const [pickedStudents, setPickedStudents] = useState([]);
   const [queue, setQueue] = useState([...studentsList]);
 
+  const resultsList = document.getElementById("results");
+  const alertMsg = document.getElementById("selectAlert");
+
   // Get half of the cards
   const numOfCards = studentsList.length / 2 + 1;
 
@@ -44,6 +47,7 @@ function App() {
     if (e.target.value !== "default") {
       let picking = e.target.value;
       setPickedStudents([picking, ...pickedStudents]);
+      alertMsg.innerHTML = "";
     }
   };
 
@@ -52,7 +56,8 @@ function App() {
     let randomStudent;
     if (
       !e.target.classList.contains("flippedCard") &&
-      document.getElementById("selectStudents").value !== "default"
+      document.getElementById("selectStudents").value !== "default" &&
+      document.getElementById("selectStudents").value !== pickedStudents[1]
     ) {
       do {
         randomStudent = queue[Math.floor(Math.random() * queue.length)];
@@ -78,9 +83,17 @@ function App() {
 
   useEffect(() => {
     // Keep track of pairs already assigned
-    const resultsList = document.getElementById("results");
-    if (pickedStudents.length > 1 && pickedStudents.length % 2 === 0) {
+    if (
+      pickedStudents.length > 1 &&
+      pickedStudents.length % 2 === 0 &&
+      pickedStudents[0] !== pickedStudents[1]
+    ) {
       resultsList.innerHTML += `<li>${pickedStudents[1]} 🤝 ${pickedStudents[0]}</li>`;
+    } else if (
+      pickedStudents.length > 2 &&
+      pickedStudents[0] === pickedStudents[1]
+    ) {
+      alertMsg.innerHTML = "Student already picked!";
     }
   }, [pickedStudents]);
 
@@ -122,6 +135,8 @@ function App() {
             })}
           </select>
 
+          <p id="selectAlert"></p>
+
           {/*         <button
           onClick={() => {
             console.log(`-----------------------`);
@@ -152,6 +167,7 @@ function App() {
           </div>
 
           <div className="resultsBox">
+            <p>Pairs:</p>
             <ul id="results"></ul>
           </div>
         </div>
