@@ -41,6 +41,7 @@ img {
 
 #results {
   margin-top: 5px;
+  list-style-type: none;
 }
 
 #selectAlert {
