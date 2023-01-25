@@ -50,7 +50,7 @@ function App() {
     if (e.target.value !== "default") {
       let picking = e.target.value;
       setPickedStudents([picking, ...pickedStudents]);
-      alertMsg.innerHTML = " ";
+      alertMsg.innerHTML = "";
     }
   };
 
