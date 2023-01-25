@@ -2,7 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
-  // Original list of all the students
+  // Original list with all the students
   let studentsList = [
     "Alexandre A.",
     "André L.",
@@ -24,7 +24,6 @@ function App() {
     "Mariana F.",
     "Marisha D.",
     "Miguel J.",
-    //"Miguel L.",
     "Paulo C.",
     "Pedro L.",
     "Rafaela U.",
@@ -33,16 +32,20 @@ function App() {
     "Vanessa V.",
   ];
 
+  // Array of already picked students
   const [pickedStudents, setPickedStudents] = useState([]);
+  // Array of students waiting to be pick (select dropdown)
   const [queue, setQueue] = useState([...studentsList]);
 
+  // Targeting resultsBox to keep track of pairs
   const resultsList = document.getElementById("results");
+  // Targeting <p> to display alert message if student already picked
   const alertMsg = document.getElementById("selectAlert");
 
   // Get half of the cards
-  const numOfCards = studentsList.length / 2; //+ 1;
+  const numOfCards = studentsList.length / 2;
 
-  // Add picking student to the  pickedStudents array
+  // Add picking student to the pickedStudents array
   const selectStudent = (e) => {
     if (e.target.value !== "default") {
       let picking = e.target.value;
@@ -113,11 +116,12 @@ function App() {
           <li></li>
           <li></li>
         </ul>
-        {/* ------------------- */}
 
+        {/* IRONHACK LOGO */}
         <div className="pickingStudent">
           <img src="ironhackLogo.png" alt="ironhack logo" />
 
+          {/* SELECT DROPDOWN TO CHOOSE THE PICKING STUDENT */}
           <select
             id="selectStudents"
             className="classic"
@@ -135,24 +139,11 @@ function App() {
             })}
           </select>
 
+          {/* ALERT MESSAGE IF STUDENT ALREADY HAS A PAIR */}
           <p id="selectAlert"></p>
-
-          {/*         <button
-          onClick={() => {
-            console.log(`-----------------------`);
-            console.log(
-              `Picked Students ${pickedStudents.length}  >>>  ${pickedStudents}`
-            );
-            console.log(
-              `Remaining Students ${studentsList.length}  >>>  ${studentsList}`
-            );
-            console.log(`Students in queue ${queue.length}  >>>  ${queue}`);
-          }}
-        >
-          console
-        </button> */}
         </div>
 
+        {/* ALL CARDS WITH STUDENTS NAMES */}
         <div className="resultsAndCards">
           <div className="allCards">
             {studentsList.slice(0, numOfCards).map((student) => {
@@ -166,11 +157,28 @@ function App() {
             })}
           </div>
 
+          {/* BOX WITH STUDENT PAIRS ALREADY ASSIGNED */}
           <div className="resultsBox">
             <p>Pairs:</p>
             <ul id="results"></ul>
           </div>
         </div>
+
+        {/* CONSOLE LOGS FOR TESTING - COMMENT BEFORE DEPLOY */}
+        {/* <button
+          onClick={() => {
+            console.log(`-----------------------`);
+            console.log(
+              `Picked Students ${pickedStudents.length}  >>>  ${pickedStudents}`
+            );
+            console.log(
+              `Remaining Students ${studentsList.length}  >>>  ${studentsList}`
+            );
+            console.log(`Students in queue ${queue.length}  >>>  ${queue}`);
+          }}
+        >
+          console
+        </button> */}
       </div>
     </>
   );
