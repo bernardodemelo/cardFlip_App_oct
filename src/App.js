@@ -24,7 +24,7 @@ function App() {
     "Mariana F.",
     "Marisha D.",
     "Miguel J.",
-    "Miguel L.",
+    //"Miguel L.",
     "Paulo C.",
     "Pedro L.",
     "Rafaela U.",
@@ -40,7 +40,7 @@ function App() {
   const alertMsg = document.getElementById("selectAlert");
 
   // Get half of the cards
-  const numOfCards = studentsList.length / 2 + 1;
+  const numOfCards = studentsList.length / 2; //+ 1;
 
   // Add picking student to the  pickedStudents array
   const selectStudent = (e) => {
