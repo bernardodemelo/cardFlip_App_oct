@@ -38,7 +38,7 @@ function App() {
   const [queue, setQueue] = useState([...studentsList]);
   // Array of pairs already assigned (results box)
   const [studentPairs, setStudentPairs] = useState([]);
-  // Will be used later to save the select dropdown e.target.value
+  // Will be used later to save the select dropdown e.target
   const [selectTarget, setSelectTarget] = useState(null);
 
   // Get half of the cards
@@ -57,8 +57,8 @@ function App() {
     let randomStudent;
     if (
       !e.target.classList.contains("flippedCard") &&
-      document.getElementById("selectStudents").value !== "default" &&
-      document.getElementById("selectStudents").value !== pickedStudents[1]
+      selectTarget.value !== "default" &&
+      selectTarget.value !== pickedStudents[1]
     ) {
       do {
         randomStudent = queue[Math.floor(Math.random() * queue.length)];
@@ -82,8 +82,8 @@ function App() {
     }
   };
 
+  // Keep track of pairs already assigned
   useEffect(() => {
-    // Keep track of pairs already assigned
     if (
       pickedStudents.length > 1 &&
       pickedStudents.length % 2 === 0 &&
