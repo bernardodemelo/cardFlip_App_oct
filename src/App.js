@@ -36,11 +36,10 @@ function App() {
   const [pickedStudents, setPickedStudents] = useState([]);
   // Array of students waiting to be pick (select dropdown)
   const [queue, setQueue] = useState([...studentsList]);
-
-  // Targeting resultsBox to keep track of pairs
-  const resultsList = document.getElementById("results");
-  // Targeting <p> to display alert message if student already picked
-  const alertMsg = document.getElementById("selectAlert");
+  // Array of pairs already assigned (results box)
+  const [studentPairs, setStudentPairs] = useState([]);
+  // Will be used later to save the select dropdown e.target.value
+  const [selectTarget, setSelectTarget] = useState(null);
 
   // Get half of the cards
   const numOfCards = studentsList.length / 2;
@@ -50,12 +49,11 @@ function App() {
     if (e.target.value !== "default") {
       let picking = e.target.value;
       setPickedStudents([picking, ...pickedStudents]);
-      alertMsg.innerHTML = "";
     }
   };
 
+  // Assign a random person to the picking student
   const pickFunction = (e) => {
-    // Assign a random person to the picking student
     let randomStudent;
     if (
       !e.target.classList.contains("flippedCard") &&
@@ -73,14 +71,14 @@ function App() {
       e.target.classList.add("flippedCard");
       e.target.textContent = randomStudent;
 
-      // Reset select dropdown to default option
-      document.getElementById("selectStudents").value = "default";
-
       // Remove already assigned students from the select dropdown
       let remaining = studentsList.filter(
         (student) => !pickedStudents.includes(student)
       );
       setQueue(remaining);
+
+      // Reset select dropdown to default after pair is assigned
+      selectTarget.value = "default";
     }
   };
 
@@ -91,12 +89,10 @@ function App() {
       pickedStudents.length % 2 === 0 &&
       pickedStudents[0] !== pickedStudents[1]
     ) {
-      resultsList.innerHTML += `<li>${pickedStudents[1]} 🤝 ${pickedStudents[0]}</li>`;
-    } else if (
-      pickedStudents.length > 2 &&
-      pickedStudents[0] === pickedStudents[1]
-    ) {
-      alertMsg.innerHTML = "Student already picked!";
+      setStudentPairs([
+        ...studentPairs,
+        `${pickedStudents[1]} 🤝 ${pickedStudents[0]}`,
+      ]);
     }
   }, [pickedStudents]);
 
@@ -125,14 +121,17 @@ function App() {
           <select
             id="selectStudents"
             className="classic"
-            onClick={(e) => selectStudent(e)}
+            onClick={(e) => {
+              selectStudent(e);
+              setSelectTarget(e.target);
+            }}
           >
             <option key="default" value="default">
               Select your name
             </option>
-            {queue.map((student) => {
+            {queue.map((student, index) => {
               return (
-                <option key={student} value={student}>
+                <option key={index} value={student}>
                   {student}
                 </option>
               );
@@ -140,16 +139,21 @@ function App() {
           </select>
 
           {/* ALERT MESSAGE IF STUDENT ALREADY HAS A PAIR */}
-          <p id="selectAlert"></p>
+          {pickedStudents.length > 1 &&
+          pickedStudents[0] === pickedStudents[1] ? (
+            <p id="selectAlert">Student already picked!</p>
+          ) : (
+            <p></p>
+          )}
         </div>
 
         {/* ALL CARDS WITH STUDENTS NAMES */}
-        <div className="resultsAndCards">
+        <div className={"resultsAndCards"}>
           <div className="allCards">
-            {studentsList.slice(0, numOfCards).map((student) => {
+            {studentsList.slice(0, numOfCards).map((student, index) => {
               return (
                 <div
-                  key={student}
+                  key={index}
                   className="card"
                   onClick={(e) => pickFunction(e)}
                 ></div>
@@ -160,7 +164,11 @@ function App() {
           {/* BOX WITH STUDENT PAIRS ALREADY ASSIGNED */}
           <div className="resultsBox">
             <p>Pairs:</p>
-            <ul id="results"></ul>
+            <ul id={"results"}>
+              {studentPairs.map((pair, index) => {
+                return <li key={index}>{pair}</li>;
+              })}
+            </ul>
           </div>
         </div>
 
