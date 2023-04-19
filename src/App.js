@@ -54,11 +54,15 @@ function App() {
 
       // Check if randomStudent is valid
       for (let i = 0; i < 1000; i++) {
+        if (studentsList.length === 1) {
+          randomStudent = studentsList[0];
+          break;
+        }
+
         randomStudent =
           studentsList[Math.floor(Math.random() * studentsList.length)];
-        if (pickedStudents.length === studentsList.length - 1) {
-          randomStudent = studentsList[0];
-        } else if (
+
+        if (
           randomStudent !== selectTarget &&
           !pickedStudents.includes(randomStudent)
         ) {
