@@ -66,8 +66,13 @@ function App() {
       }
 
       if (condition) {
-        randomStudent =
-          studentsList[Math.floor(Math.random() * studentsList.length)];
+        randomStudent = studentsList.filter(
+          (student) => !pickedStudents.includes(student)
+        )[
+          Math.floor(
+            Math.random() * studentsList.length - pickedStudents.length
+          )
+        ];
       }
 
       /* 
