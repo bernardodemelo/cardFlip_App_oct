@@ -32,6 +32,8 @@ function App() {
     "Victoria A.",
   ];
 
+  // Copy of the student list
+  const [studentsListCopy, setStudentsListCopy] = useState(studentsList);
   // Array of already picked students
   const [pickedStudents, setPickedStudents] = useState([]);
   // Array of pairs already assigned (results box)
@@ -54,19 +56,21 @@ function App() {
 
       // Check if randomStudent is valid
       for (let i = 0; i < 1000; i++) {
-        if (studentsList.length === 1) {
-          randomStudent = studentsList[0];
+        if (studentsListCopy.length === 1) {
+          randomStudent = studentsListCopy[0];
           break;
         }
 
         randomStudent =
-          studentsList[Math.floor(Math.random() * studentsList.length)];
+          studentsListCopy[Math.floor(Math.random() * studentsList.length)];
 
         if (
           randomStudent !== selectTarget &&
           !pickedStudents.includes(randomStudent)
         ) {
-          studentsList.splice(randomStudent, 1);
+          setStudentsListCopy(
+            studentsList.filter((student) => !pickedStudents.includes(student))
+          );
           break;
         }
       }
@@ -126,20 +130,13 @@ function App() {
             <option key="default" value="default">
               Select your name
             </option>
-            {/*             {studentsList.map((student, index) => {
+            {studentsList.map((student, index) => {
               if (!pickedStudents.includes(student))
                 return (
                   <option key={index} value={student}>
                     {student}
                   </option>
                 );
-            })} */}
-            {studentsList.map((student, index) => {
-              return (
-                <option key={index} value={student}>
-                  {student}
-                </option>
-              );
             })}
           </select>
 
@@ -175,21 +172,21 @@ function App() {
               })}
             </ul>
           </div>
-        </div>
 
-        {/* CONSOLE LOGS FOR TESTING - COMMENT BEFORE DEPLOY */}
-        <button
-          onClick={() => {
-            console.log(`-------------------------------------`);
-            console.log(`ALL STUDENTS  >>>  ${studentsList.length}`);
-            console.log(`SELECTED STUDENT  >>>  ${selectTarget}`);
-            console.log(
-              `PICKED STUDENTS ${pickedStudents.length}  >>>  ${pickedStudents}`
-            );
-          }}
-        >
-          console.log
-        </button>
+          {/* CONSOLE LOGS FOR TESTING - COMMENT BEFORE DEPLOY */}
+          <button
+            onClick={() => {
+              console.log(`-------------------------------------`);
+              console.log(`ALL STUDENTS  >>>  ${studentsList.length}`);
+              console.log(`SELECTED STUDENT  >>>  ${selectTarget}`);
+              console.log(
+                `PICKED STUDENTS ${pickedStudents.length}  >>>  ${pickedStudents}`
+              );
+            }}
+          >
+            console.log
+          </button>
+        </div>
       </div>
     </>
   );
