@@ -32,8 +32,6 @@ function App() {
     "Victoria A.",
   ];
 
-  // Copy of the student list
-  const [studentsListCopy, setStudentsListCopy] = useState(studentsList);
   // Array of already picked students
   const [pickedStudents, setPickedStudents] = useState([]);
   // Array of pairs already assigned (results box)
@@ -46,7 +44,6 @@ function App() {
 
   // Assign a random person to the picking student
   const pickFunction = (e) => {
-    // Check if the clicked card isn't already flipped
     if (
       !e.target.classList.contains("flippedCard") &&
       selectTarget !== "default" &&
@@ -54,23 +51,13 @@ function App() {
     ) {
       let randomStudent;
 
-      // Check if randomStudent is valid
-      for (let i = 0; i < 1000; i++) {
-        if (studentsListCopy.length === 1) {
-          randomStudent = studentsListCopy[0];
-          break;
-        }
-
+      for (let i = 0; i < 50; i++) {
         randomStudent =
-          studentsListCopy[Math.floor(Math.random() * studentsList.length)];
-
+          studentsList[Math.floor(Math.random() * studentsList.length)];
         if (
           randomStudent !== selectTarget &&
           !pickedStudents.includes(randomStudent)
         ) {
-          setStudentsListCopy(
-            studentsList.filter((student) => !pickedStudents.includes(student))
-          );
           break;
         }
       }
@@ -172,21 +159,21 @@ function App() {
               })}
             </ul>
           </div>
-
-          {/* CONSOLE LOGS FOR TESTING - COMMENT BEFORE DEPLOY */}
-          <button
-            onClick={() => {
-              console.log(`-------------------------------------`);
-              console.log(`ALL STUDENTS  >>>  ${studentsList.length}`);
-              console.log(`SELECTED STUDENT  >>>  ${selectTarget}`);
-              console.log(
-                `PICKED STUDENTS ${pickedStudents.length}  >>>  ${pickedStudents}`
-              );
-            }}
-          >
-            console.log
-          </button>
         </div>
+
+        {/* CONSOLE LOGS FOR TESTING - COMMENT BEFORE DEPLOY */}
+        {/* <button
+          onClick={() => {
+            console.log(`-------------------------------------`);
+            console.log(`ALL STUDENTS  >>>  ${studentsList.length}`);
+            console.log(`SELECTED STUDENT  >>>  ${selectTarget}`);
+            console.log(
+              `PICKED STUDENTS ${pickedStudents.length}  >>>  ${pickedStudents}`
+            );
+          }}
+        >
+          console.log
+        </button> */}
       </div>
     </>
   );
