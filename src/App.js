@@ -53,15 +53,15 @@ function App() {
       let randomStudent;
 
       // Check if randomStudent is valid
-      for (let i = 0; i < Infinity; i++) {
+      for (let i = 0; i < 1000; i++) {
         randomStudent =
           studentsList[Math.floor(Math.random() * studentsList.length)];
         if (
           randomStudent !== selectTarget &&
           !pickedStudents.includes(randomStudent)
         ) {
-          if (randomStudent != "Niroj G." && selectTarget != "Joie S.") {
-            if (randomStudent != "Joie S." && selectTarget != "Niroj G.") {
+          if (randomStudent !== "Niroj G." && selectTarget !== "Joie S.") {
+            if (randomStudent !== "Joie S." && selectTarget !== "Niroj G.") {
               break;
             }
           }
