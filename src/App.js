@@ -51,28 +51,22 @@ function App() {
     ) {
       let randomStudent;
 
-      /*       for (let i = 0; i < 100; i++) {
+      for (let i = 0; i <= 50; i++) {
         randomStudent =
           studentsList[Math.floor(Math.random() * studentsList.length)];
         if (
           randomStudent !== selectTarget &&
           !pickedStudents.includes(randomStudent)
         ) {
-          break;
+          if (
+            randomStudent != "Niroj G." &&
+            selectTarget != "Joie S." &&
+            randomStudent != "Joie S." &&
+            selectTarget != "Niroj G."
+          )
+            break;
         }
-      } */
-
-      do {
-        randomStudent =
-          studentsList[Math.floor(Math.random() * studentsList.length)];
-      } while (
-        randomStudent === "Niroj G." &&
-        selectTarget === "Joie S." &&
-        randomStudent === "Joie S." &&
-        selectTarget === "Niroj G." &&
-        randomStudent === selectTarget &&
-        pickedStudents.includes(randomStudent)
-      );
+      }
 
       // Update the array of already picked students
       setPickedStudents([randomStudent, selectTarget, ...pickedStudents]);
