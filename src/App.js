@@ -44,6 +44,10 @@ function App() {
 
   // Assign a random person to the picking student
   const pickFunction = (e) => {
+    let condition =
+      ["Niroj G.", "Joie S."].includes(randomStudent) &&
+      ["Niroj G.", "Joie S."].includes(selectTarget);
+
     if (
       !e.target.classList.contains("flippedCard") &&
       selectTarget !== "default" &&
@@ -56,12 +60,15 @@ function App() {
           studentsList[Math.floor(Math.random() * studentsList.length)];
         if (
           randomStudent !== selectTarget &&
-          !pickedStudents.includes(randomStudent) &&
-          !["Niroj G.", "Joie S."].includes(randomStudent) &&
-          !["Niroj G.", "Joie S."].includes(selectTarget)
+          !pickedStudents.includes(randomStudent)
         ) {
           break;
         }
+      }
+
+      if (condition) {
+        randomStudent =
+          studentsList[Math.floor(Math.random() * studentsList.length)];
       }
 
       /* 
