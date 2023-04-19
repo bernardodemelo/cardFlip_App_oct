@@ -51,12 +51,17 @@ function App() {
     ) {
       let randomStudent;
 
-      for (let i = 0; i < 50; i++) {
+      for (let i = 0; i < 100; i++) {
         randomStudent =
           studentsList[Math.floor(Math.random() * studentsList.length)];
         if (
           randomStudent !== selectTarget &&
-          !pickedStudents.includes(randomStudent)
+          !pickedStudents.includes(randomStudent) &&
+          //special condition
+          randomStudent !== "Niroj G." &&
+          selectTarget !== "Joie S." &&
+          randomStudent !== "Joie S." &&
+          selectTarget !== "Niroj G."
         ) {
           break;
         }
