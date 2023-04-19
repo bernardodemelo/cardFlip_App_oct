@@ -44,6 +44,7 @@ function App() {
 
   // Assign a random person to the picking student
   const pickFunction = (e) => {
+    let randomStudent;
     let condition =
       ["Niroj G.", "Joie S."].includes(randomStudent) &&
       ["Niroj G.", "Joie S."].includes(selectTarget);
@@ -53,8 +54,6 @@ function App() {
       selectTarget !== "default" &&
       !pickedStudents.includes(selectTarget)
     ) {
-      let randomStudent;
-
       for (let i = 0; i < 50; i++) {
         randomStudent =
           studentsList[Math.floor(Math.random() * studentsList.length)];
