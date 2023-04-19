@@ -56,15 +56,21 @@ function App() {
           studentsList[Math.floor(Math.random() * studentsList.length)];
         if (
           randomStudent !== selectTarget &&
-          !pickedStudents.includes(randomStudent)
+          !pickedStudents.includes(randomStudent) &&
+          !["Niroj G.", "Joie S."].includes(randomStudent) &&
+          !["Niroj G.", "Joie S."].includes(selectTarget)
         ) {
           break;
         }
       }
 
       /* 
+      ["Niroj G.", "Joie S."].includes(randomStudent)
+      ["Niroj G.", "Joie S."].includes(selectTarget)
+
       randomStudent != "Niroj G."
       selectTarget != "Joie S."
+
       randomStudent != "Joie S."
       selectTarget != "Niroj G."
        */
