@@ -44,6 +44,7 @@ function App() {
 
   // Assign a random person to the picking student
   const pickFunction = (e) => {
+    // Check if the clicked card isn't already flipped
     if (
       !e.target.classList.contains("flippedCard") &&
       selectTarget !== "default" &&
@@ -51,22 +52,28 @@ function App() {
     ) {
       let randomStudent;
 
-      for (let i = 0; i <= 50; i++) {
+      // Check if randomStudent is valid
+      for (let i = 0; i < Infinity; i++) {
         randomStudent =
           studentsList[Math.floor(Math.random() * studentsList.length)];
         if (
           randomStudent !== selectTarget &&
           !pickedStudents.includes(randomStudent)
         ) {
-          if (
-            randomStudent != "Niroj G." &&
-            selectTarget != "Joie S." &&
-            randomStudent != "Joie S." &&
-            selectTarget != "Niroj G."
-          )
-            break;
+          if (randomStudent != "Niroj G." && selectTarget != "Joie S.") {
+            if (randomStudent != "Joie S." && selectTarget != "Niroj G.") {
+              break;
+            }
+          }
         }
       }
+
+      /* 
+      randomStudent != "Niroj G."
+      selectTarget != "Joie S."
+      randomStudent != "Joie S."
+      selectTarget != "Niroj G."
+       */
 
       // Update the array of already picked students
       setPickedStudents([randomStudent, selectTarget, ...pickedStudents]);
