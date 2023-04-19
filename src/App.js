@@ -56,15 +56,14 @@ function App() {
       for (let i = 0; i < 1000; i++) {
         randomStudent =
           studentsList[Math.floor(Math.random() * studentsList.length)];
-        if (
+        if (pickedStudents.length === studentsList.length - 1) {
+          randomStudent = studentsList[0];
+        } else if (
           randomStudent !== selectTarget &&
           !pickedStudents.includes(randomStudent)
         ) {
-          if (randomStudent !== "Niroj G." && selectTarget !== "Joie S.") {
-            if (randomStudent !== "Joie S." && selectTarget !== "Niroj G.") {
-              break;
-            }
-          }
+          studentsList.splice(randomStudent, 1);
+          break;
         }
       }
 
@@ -123,13 +122,20 @@ function App() {
             <option key="default" value="default">
               Select your name
             </option>
-            {studentsList.map((student, index) => {
+            {/*             {studentsList.map((student, index) => {
               if (!pickedStudents.includes(student))
                 return (
                   <option key={index} value={student}>
                     {student}
                   </option>
                 );
+            })} */}
+            {studentsList.map((student, index) => {
+              return (
+                <option key={index} value={student}>
+                  {student}
+                </option>
+              );
             })}
           </select>
 
@@ -168,7 +174,7 @@ function App() {
         </div>
 
         {/* CONSOLE LOGS FOR TESTING - COMMENT BEFORE DEPLOY */}
-        {/* <button
+        <button
           onClick={() => {
             console.log(`-------------------------------------`);
             console.log(`ALL STUDENTS  >>>  ${studentsList.length}`);
@@ -179,7 +185,7 @@ function App() {
           }}
         >
           console.log
-        </button> */}
+        </button>
       </div>
     </>
   );
