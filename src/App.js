@@ -45,15 +45,14 @@ function App() {
   // Assign a random person to the picking student
   const pickFunction = (e) => {
     let randomStudent;
-    let condition =
-      ["Niroj G.", "Joie S."].includes(randomStudent) &&
-      ["Niroj G.", "Joie S."].includes(selectTarget);
 
+    // Check if the the picked card is valid
     if (
       !e.target.classList.contains("flippedCard") &&
       selectTarget !== "default" &&
       !pickedStudents.includes(selectTarget)
     ) {
+      // Pick a random student and check if it is valid otherwise pick again
       for (let i = 0; i < 50; i++) {
         randomStudent =
           studentsList[Math.floor(Math.random() * studentsList.length)];
@@ -65,6 +64,11 @@ function App() {
         }
       }
 
+      /* -------------- Special condition -------------- */
+      let condition =
+        ["Niroj G.", "Joie S."].includes(randomStudent) &&
+        ["Niroj G.", "Joie S."].includes(selectTarget);
+
       if (condition) {
         randomStudent = studentsList.filter(
           (student) => !pickedStudents.includes(student)
@@ -74,17 +78,7 @@ function App() {
           )
         ];
       }
-
-      /* 
-      ["Niroj G.", "Joie S."].includes(randomStudent)
-      ["Niroj G.", "Joie S."].includes(selectTarget)
-
-      randomStudent != "Niroj G."
-      selectTarget != "Joie S."
-
-      randomStudent != "Joie S."
-      selectTarget != "Niroj G."
-       */
+      /* ----------------------------------------------- */
 
       // Update the array of already picked students
       setPickedStudents([randomStudent, selectTarget, ...pickedStudents]);
@@ -177,20 +171,6 @@ function App() {
             </ul>
           </div>
         </div>
-
-        {/* CONSOLE LOGS FOR TESTING - COMMENT BEFORE DEPLOY */}
-        {/* <button
-          onClick={() => {
-            console.log(`-------------------------------------`);
-            console.log(`ALL STUDENTS  >>>  ${studentsList.length}`);
-            console.log(`SELECTED STUDENT  >>>  ${selectTarget}`);
-            console.log(
-              `PICKED STUDENTS ${pickedStudents.length}  >>>  ${pickedStudents}`
-            );
-          }}
-        >
-          console.log
-        </button> */}
       </div>
     </>
   );
