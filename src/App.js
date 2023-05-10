@@ -4,6 +4,13 @@ import { useState } from "react";
 function App() {
   // Original list with all the students
   let studentsList = [
+    "Cristian K.",
+    "Joie S.",
+    "Renato P.",
+    "Tomás M.",
+    "Victoria A.",
+  ];
+  /*   let studentsList = [
     "Ana R.",
     "Bernardo A.",
     "Cristian K.",
@@ -30,7 +37,7 @@ function App() {
     "Roshan P.",
     "Tomás M.",
     "Victoria A.",
-  ];
+  ]; */
 
   // Array of already picked students
   const [pickedStudents, setPickedStudents] = useState([]);
