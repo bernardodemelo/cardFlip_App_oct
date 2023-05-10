@@ -3,9 +3,7 @@ import { useState } from "react";
 
 function App() {
   // Original list with all the students
-  let studentsList = ["Cristian K.", "Joie S."];
-
-  /*   let studentsList = [
+  let studentsList = [
     "Ana R.",
     "Bernardo A.",
     "Cristian K.",
@@ -32,7 +30,7 @@ function App() {
     "Roshan P.",
     "Tomás M.",
     "Victoria A.",
-  ]; */
+  ];
 
   // Array of already picked students
   const [pickedStudents, setPickedStudents] = useState([]);
@@ -80,12 +78,8 @@ function App() {
           (student) => !pickedStudents.includes(student)
         );
         let rIndex = Math.floor(
-          Math.random() * (studentsList.length - pickedStudents.length)
+          Math.random() * (studentsList.length - pickedStudents.length) + 1
         );
-
-        if (rIndex < 0) {
-          rIndex++;
-        }
 
         console.log(rStudents.length, pickedStudents.length, rIndex);
         randomStudent = rStudents[rIndex];
