@@ -66,8 +66,12 @@ function App() {
 
       /* -------------- Special condition -------------- */
       let condition =
-        ["Niroj G.", "Joie S."].includes(randomStudent) &&
-        ["Niroj G.", "Joie S."].includes(selectTarget);
+        ["Cristian K.", "Renato P.", "Niroj G.", "Joie S."].includes(
+          randomStudent
+        ) &&
+        ["Cristian K.", "Renato P.", "Niroj G.", "Joie S."].includes(
+          selectTarget
+        );
 
       if (condition) {
         randomStudent = studentsList.filter(
