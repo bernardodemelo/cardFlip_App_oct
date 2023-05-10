@@ -78,7 +78,7 @@ function App() {
           (student) => !pickedStudents.includes(student)
         )[
           Math.floor(
-            Math.random() * studentsList.length - pickedStudents.length
+            Math.random() * studentsList.length - pickedStudents.length - 1
           )
         ];
       }
