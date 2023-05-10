@@ -74,13 +74,15 @@ function App() {
         );
 
       if (condition) {
-        randomStudent = studentsList.filter(
+        let rStudents = studentsList.filter(
           (student) => !pickedStudents.includes(student)
-        )[
-          Math.floor(
-            Math.random() * studentsList.length - pickedStudents.length - 1
-          )
-        ];
+        );
+        let rIndex = Math.floor(
+          Math.random() * studentsList.length - pickedStudents.length - 1
+        );
+
+        console.log(rStudents.length, rIndex);
+        randomStudent = rStudents[rIndex];
       }
       /* ----------------------------------------------- */
 
