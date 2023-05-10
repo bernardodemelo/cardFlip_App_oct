@@ -80,8 +80,12 @@ function App() {
           (student) => !pickedStudents.includes(student)
         );
         let rIndex = Math.floor(
-          Math.random() * ((studentsList.length-1) - (pickedStudents.length-1) +1)
+          Math.random() * (studentsList.length - pickedStudents.length)
         );
+
+        if (rIndex < 0) {
+          rIndex++;
+        }
 
         console.log(rStudents.length, pickedStudents.length, rIndex);
         randomStudent = rStudents[rIndex];
