@@ -85,10 +85,24 @@ function App() {
           (student) => !pickedStudents.includes(student)
         );
         let rIndex = Math.floor(
-          Math.random() * (studentsList.length - pickedStudents.length) + 1
+          Math.random() * (studentsList.length - pickedStudents.length)
         );
 
-        console.log(rStudents.length, pickedStudents.length, rIndex);
+        if (rIndex > studentsList.length - pickedStudents.length - 2) {
+          rIndex--;
+          console.log("--");
+        }
+        if (rIndex < 0) {
+          rIndex++;
+          console.log("++");
+        }
+
+        console.log(
+          "Students: " + rStudents.length,
+          "Picked: " + pickedStudents.length,
+          "Index: " + rIndex
+        );
+
         randomStudent = rStudents[rIndex];
       }
       /* ----------------------------------------------- */
