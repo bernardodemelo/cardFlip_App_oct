@@ -3,9 +3,7 @@ import { useState } from "react";
 
 function App() {
   // Original list with all the students
-  let studentsList = ["Cristian K.", "Joie S.", "Renato P.", "Victoria A."];
-
-  /*   let studentsList = [
+   let studentsList = [
     "Ana R.",
     "Bernardo A.",
     "Cristian K.",
@@ -32,7 +30,7 @@ function App() {
     "Roshan P.",
     "Tomás M.",
     "Victoria A.",
-  ]; */
+  ]; 
 
   // Array of already picked students
   const [pickedStudents, setPickedStudents] = useState([]);
@@ -66,39 +64,31 @@ function App() {
         }
       }
 
-      /* -------------- Special condition -------------- */
+      /* ------------------ Condition ------------------ */
+      let sArray = [
+        "Cristian K.",
+        "Renato P.",
+        "Niroj G.",
+        "Joie S.",
+        undefined,
+        // don't leave this students to pick at the end
+      ];
+      
       let condition =
-        ["Cristian K.", "Renato P.", "Niroj G.", "Joie S."].includes(
-          randomStudent
-        ) &&
-        ["Cristian K.", "Renato P.", "Niroj G.", "Joie S."].includes(
-          selectTarget
-        );
+        sArray.includes(randomStudent) && sArray.includes(selectTarget);
 
       if (condition) {
         let rStudents = studentsList.filter(
           (student) => !pickedStudents.includes(student)
         );
-        let rIndex = Math.floor(
-          Math.random() * (studentsList.length - pickedStudents.length)
-        );
 
-        if (rIndex > studentsList.length - pickedStudents.length - 2) {
-          rIndex--;
-          console.log("--");
-        }
-        if (rIndex < 0) {
-          rIndex++;
-          console.log("++");
-        }
-
-        console.log(
-          "Students: " + rStudents.length,
-          "Picked: " + pickedStudents.length,
-          "Index: " + rIndex
-        );
-
-        randomStudent = rStudents[rIndex];
+        do {
+          console.log(randomStudent)
+          let rIndex = Math.floor(
+            Math.random() * (studentsList.length - pickedStudents.length)
+          );
+          randomStudent = rStudents[rIndex];
+        } while (sArray.includes(randomStudent));
       }
       /* ----------------------------------------------- */
 
@@ -110,7 +100,12 @@ function App() {
       e.target.textContent = randomStudent;
 
       // Keep track of pairs already assigned
-      setStudentPairs([...studentPairs, `${selectTarget} 🤝 ${randomStudent}`]);
+      let emojis = ["🧠", "💻", "💪", "⚙️", "🤖", "⌨️", "💾", "📡", "📱"];
+      let index = Math.floor(Math.random() * emojis.length);
+      setStudentPairs([
+        ...studentPairs,
+        `${selectTarget} ${emojis[index]} ${randomStudent}`,
+      ]);
 
       // Reset select dropdown to default after pair is assigned
       setSelectTarget("default");
