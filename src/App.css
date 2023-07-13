@@ -64,8 +64,8 @@ img {
 
 .card {
   z-index: 1;
-  width: 100px;
-  height: 160px;
+  width: 125px;
+  height: 180px;
   background-image: url(../public/cardCover.jpg);
   background-size: contain;
   border-radius: 8px;
@@ -80,8 +80,8 @@ img {
 
 .flippedCard {
   z-index: 1;
-  width: 100px;
-  height: 160px;
+  width: 125px;
+  height: 180px;
   background-color: white;
   border: 2px solid rgba(50, 195, 253, 255);
   border-radius: 8px;
