@@ -4,26 +4,24 @@ import { useState } from 'react';
 function App() {
   // Original list with all the students
   let studentsList = [
-    'Aamir M.',
-    'Agnes M.',
-    'Filipa F.',
-    'Paulina G.',
-    'André P.',
+    'André G.',
     'Bruno C.',
-    'Gabriel O.',
-    'Gonçalo M.',
-    'J. Borrega',
-    'J. Elias',
-    'Julia G.',
-    'Manuel S.',
-    'Mariana M.',
-    'Mariana S.',
-    'Maureen T.',
-    'Mehdi N.',
-    'Miguel L.',
-    'Rita S.',
-    'Tiago R.',
-    'Tomás A.',
+    'Bruno M.',
+    'Caroline V.',
+    'Daniel R.',
+    'David C.',
+    'Fares Q.',
+    'Filipe D.',
+    'Guilherme S.',
+    'Jakob B.',
+    'João C.',
+    'João S.',
+    'João V.',
+    'Marcelo M.',
+    'Mariana C.',
+    'Marina B.',
+    'Miguel M.',
+    'Vasco G.'
   ];
 
   // Array of already picked students
