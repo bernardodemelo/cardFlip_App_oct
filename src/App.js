@@ -4,8 +4,8 @@ import { useState } from 'react';
 function App() {
   // Original list with all the students
   let studentsList = [
-    'Filipe D. + Jakob B.',
-    'Daniel R. C.',
+    'André G.',
+    'Bruno C.',
     'Bruno M.',
     'Caroline V.',
     'Daniel R.',
