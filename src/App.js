@@ -129,12 +129,12 @@ function App() {
               Select your name
             </option>
             {studentsList.map((student, index) => {
-              if (!pickedStudents.includes(student))
+              if (!pickedStudents.includes(student)){
                 return (
                   <option key={index} value={student}>
                     {student}
                   </option>
-                );
+                );}
             })}
           </select>
 
