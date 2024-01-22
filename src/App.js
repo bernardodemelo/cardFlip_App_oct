@@ -128,14 +128,13 @@ function App() {
             <option key="default" value="default">
               Select your name
             </option>
-            {studentsList.map((student, index) => {
-              if (!pickedStudents.includes(student)){
-                return (
+            {studentsList.map((student, index) => (
+              !pickedStudents.includes(student)?
                   <option key={index} value={student}>
                     {student}
                   </option>
-                );}
-            })}
+                : "")
+            )}
           </select>
 
           {/* ALERT MESSAGE IF STUDENT ALREADY HAS A PAIR */}
