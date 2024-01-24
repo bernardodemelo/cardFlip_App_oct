@@ -28,7 +28,8 @@ function App() {
     'Rui M.',
     'Tiago S.',
     'Tomás B.',
-    'Tushar S.'
+    'Tushar S.', 
+    'Group of 3'
   ];
 
   // Array of already picked students
